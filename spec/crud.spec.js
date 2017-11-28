@@ -63,6 +63,11 @@ describe("Test CRUD Functions", () => {
 		expect(result[0].name).toBe('Jasmine Many Updated');
 	});
 
+	it("should find 3 documents", async () => {
+		let result = await sql.find(Object.assign({},db_params),{});
+		expect(result.length).toBe(3);
+	});
+
 	it("should deleteOne document", async () => {
 		let result = await sql.deleteOne(Object.assign({},db_params),{name:'Jasmine Updated'});
 		expect(result.deleted === 1).toBeTruthy();
