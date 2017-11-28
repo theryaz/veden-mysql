@@ -17,7 +17,8 @@ describe("Test CRUD Functions", () => {
 		let result = await sql.insertOne(Object.assign({},db_params),{
 			name: 'Jasmine',
 			email: 'jasmine@gmail.com',
-			salary: ~~(Math.random() * 1000000) / 100
+			salary: ~~(Math.random() * 1000000) / 100,
+			created: new Date('2017-11-27')
 		});
 		expect(result._id).toBeTruthy();
 	});
@@ -27,12 +28,14 @@ describe("Test CRUD Functions", () => {
 			{
 				name: 'Jasmine Many',
 				email: 'jasmine.many1@gmail.com',
-				salary: ~~(Math.random() * 1000000) / 100
+				salary: ~~(Math.random() * 1000000) / 100,
+				created: new Date('2017-11-29')
 			},
 			{
 				name: 'Jasmine Many',
 				email: 'jasmine.many2@gmail.com',
-				salary: ~~(Math.random() * 1000000) / 100
+				salary: ~~(Math.random() * 1000000) / 100,
+				created: new Date('2017-11-29')
 			}
 		]);
 		expect(result._id).toBeTruthy();
@@ -44,6 +47,12 @@ describe("Test CRUD Functions", () => {
 	});
 	it("should count 2 documents", async () => {
 		let result = await sql.count(Object.assign({},db_params),{name: 'Jasmine Many'});
+		expect(result).toBe(2);
+	});
+
+	it("should count 2 documents with date greaterthan 2017-11-28", async () => {
+		let date = new Date('2017-11-28')
+		let result = await sql.count(Object.assign({},db_params),{['created>']:date});
 		expect(result).toBe(2);
 	});
 
