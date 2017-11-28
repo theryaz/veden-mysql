@@ -1,6 +1,6 @@
 {
-  "name": "veden-mongodb",
-  "version": "0.1.0",
+  "name": "veden-mysql",
+  "version": "1.0.0",
   "description": "MySQL Client wrapper",
   "main": "lib/index.js",
   "scripts": {
