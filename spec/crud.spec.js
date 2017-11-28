@@ -7,7 +7,7 @@ describe("Test CRUD Functions", () => {
 		DB_PASS: process.env.DB_PASS || 'changeme',
 		DB_DATABASE: process.env.DB_DATABASE || 'TEST'
 	};
-	const db_params = { table: process.env.DB_TABLE || 'test'};
+	const db_params = { table: process.env.DB_TABLE || 'test', debug: true};
 	console.log('Using Options for DB',options,"\n",db_params,"\n");
 	beforeEach(() => {
 		sql = new MySQLDatabase(options);
@@ -19,6 +19,22 @@ describe("Test CRUD Functions", () => {
 			email: 'jasmine@gmail.com',
 			salary: ~~(Math.random() * 1000000) / 100
 		});
+		expect(result._id).toBeTruthy();
+	});
+
+	it("should insertMany documents", async () => {
+		let result = await sql.insertMany(db_params,[
+			{
+				name: 'Jasmine Many',
+				email: 'jasmine.many1@gmail.com',
+				salary: ~~(Math.random() * 1000000) / 100
+			},
+			{
+				name: 'Jasmine Many',
+				email: 'jasmine.many2@gmail.com',
+				salary: ~~(Math.random() * 1000000) / 100
+			}
+		]);
 		expect(result._id).toBeTruthy();
 	});
 
