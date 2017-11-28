@@ -45,6 +45,14 @@ All methods return promises which resolve to their return type
 
 Returns a MySQL Connection as per [the documention](https://www.npmjs.com/package/mysql#introduction)
 
+#### query(query_string)
+
+Run a generic query, returns promise resolving to result
+Returns
+- fields: Array of fields' data
+- rows: Array of rows as JSON
+
+
 #### count()
 
 TODO
@@ -57,30 +65,37 @@ Returns
 
 #### findOne()
 
-Returns only the matching row as JSON
+Returns only the first row to match as JSON
 
 #### insertOne()
 
- TODO
+Returns
+- \_id: ID of inserted document
+- result: Raw Response from database (varies by server implementation)
 
 #### insertMany()
- TODO
-
-#### upsertOne()
-
- TODO
+Returns
+- \_id: ID of the first inserted document
+- result: Raw Response from database (varies by server implementation)
 
 #### updateOne()
 
- TODO
-
+Returns
+- matched: Number of matched documents
+- modified: Number of modified documents
+- result: Raw Response from database (varies by server implementation)
 
 #### updateMany()
 
- TODO
+Returns
+- matched: Number of matched documents
+- modified: Number of modified documents
+- result: Raw Response from database (varies by server implementation)
 
 #### deleteOne()
- TODO
+Returns
+- deleted: count of deleted documents
 
 #### deleteMany()
- TODO
+Returns
+- deleted: count of deleted documents
