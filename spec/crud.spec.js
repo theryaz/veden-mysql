@@ -14,7 +14,7 @@ describe("Test CRUD Functions", () => {
 	});
 
 	it("should insertOne document", async () => {
-		let result = await sql.insertOne(db_params,{
+		let result = await sql.insertOne(Object.assign({},db_params),{
 			name: 'Jasmine',
 			email: 'jasmine@gmail.com',
 			salary: ~~(Math.random() * 1000000) / 100
@@ -23,7 +23,7 @@ describe("Test CRUD Functions", () => {
 	});
 
 	it("should insertMany documents", async () => {
-		let result = await sql.insertMany(db_params,[
+		let result = await sql.insertMany(Object.assign({},db_params),[
 			{
 				name: 'Jasmine Many',
 				email: 'jasmine.many1@gmail.com',
@@ -38,13 +38,27 @@ describe("Test CRUD Functions", () => {
 		expect(result._id).toBeTruthy();
 	});
 
+	it("should updateOne document", async () => {
+		let result = await sql.updateOne(Object.assign({},db_params),{name:'Jasmine'},{
+			name: 'Jasmine Updated',
+		});
+		expect(result.modified).toBe(1);
+	});
+
+	it("should updateMany documents", async () => {
+		let result = await sql.updateMany(Object.assign({},db_params),{name:'Jasmine Many'},{
+			name: 'Jasmine Many Updated',
+		});
+		expect(result.modified > 1).toBeTruthy();
+	});
+
 	it("should find one document", async () => {
-		let result = await sql.findOne(db_params);
+		let result = await sql.findOne(Object.assign({},db_params));
 		expect(result).toBeTruthy();
 	});
 
 	it("should find one document", async () => {
-		let result = await sql.findOne(db_params);
+		let result = await sql.findOne(Object.assign({},db_params));
 		expect(result).toBeTruthy();
 	});
 
