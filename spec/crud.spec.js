@@ -38,6 +38,15 @@ describe("Test CRUD Functions", () => {
 		expect(result._id).toBeTruthy();
 	});
 
+	it("should count 3 documents", async () => {
+		let result = await sql.count(Object.assign({},db_params),{});
+		expect(result).toBe(3);
+	});
+	it("should count 2 documents", async () => {
+		let result = await sql.count(Object.assign({},db_params),{name: 'Jasmine Many'});
+		expect(result).toBe(2);
+	});
+
 	it("should updateOne document", async () => {
 		let result = await sql.updateOne(Object.assign({},db_params),{name:'Jasmine'},{
 			name: 'Jasmine Updated',
