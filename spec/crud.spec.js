@@ -81,6 +81,12 @@ describe("Test CRUD Functions", () => {
 		expect(result[0].name).toBe('Jasmine Many Updated');
 	});
 
+	it("should find documents and sort", async () => {
+		let result = await sql.find(Object.assign({sort:{id:"asc",name:"desc",email:-1}},db_params),{name: 'Jasmine Many Updated'});
+		expect(result.length > 1).toBeTruthy();
+		expect(result[0].name).toBe('Jasmine Many Updated');
+	});
+
 	it("should find 3 documents", async () => {
 		let result = await sql.find(Object.assign({},db_params),{});
 		expect(result.length).toBe(3);
